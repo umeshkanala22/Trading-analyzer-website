@@ -1,7 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import csv
+import time
+import os
+import sys
+import matplotlib.pyplot as plt
+import pandas as pd
+from datetime import date
+from datetime import timedelta as td
+from jugaad_data.nse import stock_csv, stock_df
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with your actual secret key
 
@@ -66,6 +74,17 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     return redirect(url_for('index'))
+def graph_generator(df,req,tity):
+    if(tity=="day"):
+        df['time'] = pd.to_datetime(df['time'])
+        plt.figure(figsize=(20, 6))
+        plt.plot(df['Date'], df[req], marker='o', linestyle='-', color='red')
+        plt.title('Stock '+req+' Over Time')
+        plt.xlabel('time')
+        plt.ylabel(req)
+        plt.grid(True)
+        plt.show()
+    return
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,6 +1,7 @@
 /* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap');
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f2f2f2;
     display: flex;
     justify-content: center;
@@ -39,7 +40,18 @@ button {
     padding: 10px;
     border: none;
     background-color: #007bff;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.1s ease-in-out;
+}
 
+button:hover {
+    background-color: #2a91ff;
+    border-radius: 10px;
+}
+
+button:active {
+    transform: scale(0.95);
 }
     /* Add this to your existing style.css */
 
@@ -69,6 +81,3 @@ button {
 .logout-button:hover {
     background-color: #c82333;
 }
-
-
-

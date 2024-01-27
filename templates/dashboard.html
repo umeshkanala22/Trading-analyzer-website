@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+</head>
+<body>
+    <div class="main">
+        <h2>This is the dashboard</h2>
+        <!-- create a dropdown to select a stock from nifty 50 -->
+        <form action="/api/stock" method="GET">
+            <select name="stock" id="stock">
+                {% for key, value in stocks.items() %}
+                    <option value="{{key}}">{{value}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+        <a href="/plot">Plot Graph</a>
+    </div>
+</body>
+</html>

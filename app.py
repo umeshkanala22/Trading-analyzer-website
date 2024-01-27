@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from utils.data import stock_names
+from utils.get_data import get_stock_data, get_live_stock_data
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with your actual secret key
@@ -66,6 +68,38 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     return redirect(url_for('index'))
+
+@app.route('/test')
+def test():
+    stocks = stock_names
+    return render_template('dashboard.html', stocks=stocks)
+
+@app.route('/plot')
+def plot():
+    stocks = stock_names
+    return render_template('plot.html', stocks=stocks)
+
+# apis
+
+@app.route('/api/stock', methods=['GET'])
+def get_stock_data_api():
+    selected_stock = request.args.get('stock')
+    data = get_live_stock_data(selected_stock)
+    return data
+
+@app.route('/api/plot', methods=['GET'])
+def get_plot():
+    selected_stock = request.args.get('stock')
+    selected_criteria = request.args.get('criteria')
+    start_date = request.args.get('begin')
+    end_date = request.args.get('end')
+    # replace '-' with ',' in start_date and end_date
+    start = start_date.replace('-', ',')
+    end = end_date.replace('-', ',')
+    print("start_date: ", start)
+    image_path = get_stock_data(selected_stock, start, end, selected_criteria)
+    return image_path
+
 
 if __name__ == '__main__':
     app.run(debug=True)

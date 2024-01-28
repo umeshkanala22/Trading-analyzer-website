@@ -24,3 +24,44 @@ def generate_graph(df, criteria, stock_symbol):
     filepath = "static/graph/" + stock_symbol + "_" + criteria + ".html"
     fig.write_html(filepath)
     return filepath
+
+# def generate_combined_graph(criteria, stock_symbols,start_date,end_date):
+#     dataframes=[]
+#     criteria = criteria.upper()
+#     start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+#     end_date = datetime.strptime(end_date, "%Y-%m-%d").date()  
+#     for stock_symbol in stock_symbols:
+#         df = stock_df(symbol=stock_symbol, from_date=start_date, to_date=end_date, series="EQ")
+#         dataframes.append(df)
+
+    
+#     fig = px.line(title=f"{criteria} vs Date for Multiple Stocks")
+
+    
+#     for df, stock_symbol in zip(dataframes, stock_symbols):
+#         df_subset = df[["DATE", criteria]]
+#         fig.add_trace(px.line(df_subset, x="DATE", y=criteria, name=stock_symbol).data[0])
+
+    
+#     filepath = f"static/graph/combined_{criteria}.html"
+
+#     fig.write_html(filepath)
+#     return filepath
+def generate_combined_graph(criteria, stock_symbols, start_date, end_date):
+    criteria = criteria.upper()
+    start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+    end_date = datetime.strptime(end_date, "%Y-%m-%d").date()  
+
+    
+    dataframes = [stock_df(symbol=stock_symbol, from_date=start_date, to_date=end_date, series="EQ") for stock_symbol in stock_symbols]
+    fig = px.line(title=f"{criteria} vs Date for Multiple Stocks")
+
+    
+    for df, stock_symbol in zip(dataframes, stock_symbols):
+        df_subset = df[["DATE", criteria]]
+        fig.add_trace(px.line(df_subset, x="DATE", y=criteria, name=stock_symbol))
+
+    filepath = f"static/graph/combined_{criteria}.html"
+
+    fig.write_html(filepath)
+    return filepath

@@ -95,7 +95,11 @@ def get_plot():
     start_date = request.args.get('begin')
     end_date = request.args.get('end')
     image_path = get_stock_data(selected_stock, start_date, end_date, selected_criteria)
-    return image_path
+    print("Image Path: ", image_path)
+    json_data = {
+        "image_path": image_path
+    }
+    return json_data
 
 
 if __name__ == '__main__':

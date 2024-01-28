@@ -8,7 +8,6 @@ def get_stock_data(stock_symbol, start_date, end_date, criteria):
     criteria = criteria.upper()
     start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
     end_date = datetime.strptime(end_date, "%Y-%m-%d").date()    
-    print(start_date, end_date)
     df = stock_df(symbol=stock_symbol, from_date=start_date, to_date=end_date, series="EQ")
     df = df[["DATE", "OPEN", "CLOSE", "HIGH", "LOW", "LTP", "VOLUME", "VALUE", "NO OF TRADES"]]
     graph_image = generate_graph(df, criteria, stock_symbol)

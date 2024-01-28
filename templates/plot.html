@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plot Graph</title>
     <!-- link the js file which is present in the static folder -->
+    <link rel="stylesheet" href="{{url_for('static', filename='plot.css')}}">
     <script src="{{url_for('static', filename='plot.js')}}"></script>
 </head>
 <body>
@@ -27,15 +28,15 @@
             <option value="high">High</option>
             <option value="low">Low</option>
             <option value="close">Close</option>
-            <option value="adj_close">Last Trade Price</option>
+            <option value="ltp">Last Trade Price</option>
             <option value="volume">Volume</option>
-            <option value="dividend_amount">Value</option>
-            <option value="split_coefficient">No of Trades</option>
+            <option value="value">Value</option>
+            <option value="no of trades">No of Trades</option>
         </select>
         <input type="submit" value="Submit">
     </form>
 
     <!-- Container for displaying the plot -->
-    <div id="plotContainer"></div>
+    <div id="plotContainer" class="graph"></div>
 </body>
 </html>

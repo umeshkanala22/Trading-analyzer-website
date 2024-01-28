@@ -4,15 +4,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from utils.data import stock_names
 from utils.get_data import get_stock_data, get_live_stock_data
 
-import csv
-import time
-import os
-import sys
-import matplotlib.pyplot as plt
-import pandas as pd
-from datetime import date
-from datetime import timedelta as td
-from jugaad_data.nse import stock_csv, stock_df
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with your actual secret key
 
@@ -77,17 +68,7 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     return redirect(url_for('index'))
-def graph_generator(df,req,tity):
-    if(tity=="day"):
-        df['time'] = pd.to_datetime(df['time'])
-        plt.figure(figsize=(20, 6))
-        plt.plot(df['Date'], df[req], marker='o', linestyle='-', color='red')
-        plt.title('Stock '+req+' Over Time')
-        plt.xlabel('time')
-        plt.ylabel(req)
-        plt.grid(True)
-        plt.show()
-    return
+
 
 @app.route('/test')
 def test():
@@ -114,10 +95,7 @@ def get_plot():
     start_date = request.args.get('begin')
     end_date = request.args.get('end')
     # replace '-' with ',' in start_date and end_date
-    start = start_date.replace('-', ',')
-    end = end_date.replace('-', ',')
-    print("start_date: ", start)
-    image_path = get_stock_data(selected_stock, start, end, selected_criteria)
+    image_path = get_stock_data(selected_stock, start_date, end_date, selected_criteria)
     return image_path
 
 

@@ -94,7 +94,6 @@ def get_plot():
     selected_criteria = request.args.get('criteria')
     start_date = request.args.get('begin')
     end_date = request.args.get('end')
-    # replace '-' with ',' in start_date and end_date
     image_path = get_stock_data(selected_stock, start_date, end_date, selected_criteria)
     return image_path
 

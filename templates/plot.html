@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plot Graph</title>
+    <!-- link the js file which is present in the static folder -->
+    <script src="{{url_for('static', filename='plot.js')}}"></script>
 </head>
 <body>
     <h2>Plot graph here</h2>
-    <form action="/api/plot" method="GET">
-        <!-- put two date selectors (begin and end) -->
+    <form id="plotForm">
         <select name="stock" id="stock">
             {% for key, value in stocks.items() %}
                 <option value="{{key}}">{{value}}</option>
             {% endfor %}
         </select>
+        <!-- put two date selectors (begin and end) and begin date should be before -->
         <label for="begin">Begin Date</label>
         <input type="date" name="begin" id="begin">
         <label for="end">End Date</label>
@@ -32,5 +34,8 @@
         </select>
         <input type="submit" value="Submit">
     </form>
+
+    <!-- Container for displaying the plot -->
+    <div id="plotContainer"></div>
 </body>
 </html>

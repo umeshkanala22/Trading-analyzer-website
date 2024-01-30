@@ -1,28 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
-</head>
-<body>
-    <div class="main">
-        <h2>This is the dashboard</h2>
-        create a dropdown to select a stock from nifty 50 -->
-        <!-- <form action="/api/stock" method="GET">
-            <select name="stock" id="stock">
-                {% for key, value in stocks.items() %}
-                    <option value="{{key}}">{{value}}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Submit">
-        </form>
-        <a href="/plot">Plot Graph</a>
-    </div>
-</body>
-</html> -->
-<!-- dashboard.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,22 +8,23 @@
     <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
     <style>
         body {
-            background-image: url('/static/background.jpg'); /* Adjust the path accordingly */
+            background-image:linear-gradient(rgba(rgb(42, 80, 151)),rgba(rgb(68, 73, 146))) url('/static/background.jpg'); 
             background-size: cover;
             background-position: center;
             height: 100vh;
+            
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white; /* Set text color to make it readable */
+            color: white; 
         }
 
         /* Additional styles for your content */
         .main {
             text-align: center;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Add transparency for better readability */
+            background-color: rgba(0, 0, 0, 0.5); 
         }
     </style>
 </head>

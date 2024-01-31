@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+    display: flex;
+    font-family: 'Popins', sans-serif;
+    height: 100vh;
+}
+
+aside {
+    width: 20%;
+    background-color: aquamarine;
+    float: left;
+    padding: 20px;
+}
+
+.sidebar{
+    font-size: 3rem;
+    margin: 0;
+    text-align: left;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* table styling */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 0.5rem;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    top: 0;
+    position: sticky;
+}
+
+.table-container {
+    display: flex;
+    height: 68vh;
+    overflow-y: scroll;
+    margin-top: 2rem;
+}
+/* styling the order by option */
+
+.orderLabel {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.orderBy {
+    font-size: 1rem;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #4CAF50;
+    background-color: #d5fed6;
+}
+
+.sortButton {
+    font-size: 1rem;
+    padding: 0.2rem;
+    width: 4rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.sortButton:hover {
+    background-color: #20a822;
+    color: white;
+    /* border: none; */
+}
+
+.sortButton:active {
+    background-color: #5fd961;
+    color: white;
+    /* border: none; */
+}

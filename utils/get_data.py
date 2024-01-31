@@ -3,6 +3,8 @@ import pandas as pd
 from datetime import date, datetime
 import matplotlib.pyplot as plt
 import plotly.express as px
+from utils.data import stock_names
+from nsetools import Nse
 
 def get_stock_data(stock_symbol, start_date, end_date, criteria):
     criteria = criteria.upper()
@@ -25,28 +27,17 @@ def generate_graph(df, criteria, stock_symbol):
     fig.write_html(filepath)
     return filepath
 
-# def generate_combined_graph(criteria, stock_symbols,start_date,end_date):
-#     dataframes=[]
-#     criteria = criteria.upper()
-#     start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
-#     end_date = datetime.strptime(end_date, "%Y-%m-%d").date()  
-#     for stock_symbol in stock_symbols:
-#         df = stock_df(symbol=stock_symbol, from_date=start_date, to_date=end_date, series="EQ")
-#         dataframes.append(df)
+def get_live_stock_data():
+    n = NSELive()
+    stock_list = list(stock_names.keys())
+    column_names = ["Stock", "lastPrice", "change", "pChange", "previousClose", "open", "close", "basePrice" ]
+    df = pd.DataFrame(columns=column_names)
+    for stock in stock_list:
+        data = n.stock_quote(stock)
+        data = data['priceInfo']
+        df.loc[len(df.index)] = [stock, data['lastPrice'], data['change'], data['pChange'], data['previousClose'], data['open'], data['close'], data['basePrice']]
+    return df
 
-    
-#     fig = px.line(title=f"{criteria} vs Date for Multiple Stocks")
-
-    
-#     for df, stock_symbol in zip(dataframes, stock_symbols):
-#         df_subset = df[["DATE", criteria]]
-#         fig.add_trace(px.line(df_subset, x="DATE", y=criteria, name=stock_symbol).data[0])
-
-    
-#     filepath = f"static/graph/combined_{criteria}.html"
-
-#     fig.write_html(filepath)
-#     return filepath
 def generate_combined_graph(criteria, stock_symbols, start_date, end_date):
     criteria = criteria.upper()
     start_date = datetime.strptime(start_date, "%Y-%m-%d").date()

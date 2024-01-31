@@ -1,69 +1,56 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
-</head>
-<body>
-    <div class="main">
-        <h2>This is the dashboard</h2>
-        create a dropdown to select a stock from nifty 50 -->
-        <!-- <form action="/api/stock" method="GET">
-            <select name="stock" id="stock">
-                {% for key, value in stocks.items() %}
-                    <option value="{{key}}">{{value}}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Submit">
-        </form>
-        <a href="/plot">Plot Graph</a>
-    </div>
-</body>
-</html> -->
-<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
     <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
-    <style>
-        body {
-            background-image: url('/static/background.jpg'); /* Adjust the path accordingly */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white; /* Set text color to make it readable */
-        }
-
-        /* Additional styles for your content */
-        .main {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Add transparency for better readability */
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <div class="main">
-        <h2>This is the dashboard</h2>
-        <!-- create a dropdown to select a stock from nifty 50 -->
-        <form action="/api/stock" method="GET">
-            <select name="stock" id="stock">
-                {% for key, value in stocks.items() %}
-                    <option value="{{key}}">{{value}}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Submit">
-        </form>
-        <a href="/plot" style="color: azure;">Plot Graph</a>
-    </div>
+    <aside>
+        <h1 class="sidebar">Sidebar</h1>
+        <p>Links and other contents ...</p>
+    </aside>
+
+    <main>
+        <h1>This is gonna be the dashboard</h1>
+        <div class="stock-live">
+            <h2>Live Stock Data</h2>
+            <!-- the data is stored in csv file i just want to show a table of it -->
+            <div class="loader"></div>
+            <!-- add a order by button with drop down list for selecting-->
+            <div>
+                <label class="orderLabel" for="orderBy">Order by:</label>
+                <select class="orderBy" name="orderBy" id="orderBy">
+                    <option value="lastPrice">lastPrice</option>
+                    <option value="change">change</option>
+                    <option value="pChange">pChange</option>
+                    <option value="previousClose">previousClose</option>
+                    <option value="open">open</option>
+                    <option value="close">close</option>
+                    <option value="basePrice">basePrice</option>
+                </select>
+                <button class="sortButton" onclick="sortData()">SORT</button>
+                <label for="filterBy">Filter by:</label>
+                <select class="filterBy" name="filterBy" id="filterBy">
+                    <option value="lastPrice">lastPrice</option>
+                    <option value="change">change</option>
+                    <option value="pChange">pChange</option>
+                    <option value="previousClose">previousClose</option>
+                    <option value="open">open</option>
+                    <option value="close">close</option>
+                    <option value="basePrice">basePrice</option>
+                </select>
+                <!-- create two inputs from and to -->
+                <input class="filterFrom" type="number" name="filterFrom" id="filterFrom" placeholder="from">
+                <input class="filterTo" type="number" name="filterTo" id="filterTo" placeholder="to">
+                <button class="filterButton" onclick="filterData()">FILTER</button>
+            </div>
+            <div class="table-container">
+                <table id="dataTable"></table>
+            </div>
+        </div>
+    </main>
+    <script src="{{url_for('static', filename='dashboard.js')}}"></script>
 </body>
 </html>

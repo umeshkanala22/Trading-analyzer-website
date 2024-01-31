@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils.data import stock_names
@@ -72,13 +72,13 @@ def logout():
 
 @app.route('/test')
 def test():
-    stocks = stock_names
-    return render_template('dashboard.html', stocks=stocks)
+    return render_template('dashboard.html')
 
 @app.route('/plot')
 def plot():
     stocks = stock_names
     return render_template('plot.html', stocks=stocks)
+
 
 # apis
 
@@ -101,6 +101,11 @@ def get_plot():
     }
     return json_data
 
+@app.route('/api/liveData', methods=['GET'])
+def get_live_data():
+    df = get_live_stock_data()
+    json_data = df.to_json(orient='records')
+    return json_data
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,5 +1,5 @@
 // Get data from local storage if it exists
-var cachedData = localStorage.getItem("cachedLiveData");
+var cachedData = sessionStorage.getItem("cachedLiveData");
 
 // If data exists, render table with it else fetch data from server
 if (cachedData) {
@@ -24,7 +24,7 @@ function fetchData() {
       var data = jsonData;
 
       // Cache data in local storage
-      localStorage.setItem("cachedLiveData", JSON.stringify(data));
+      sessionStorage.setItem("cachedLiveData", JSON.stringify(data));
 
       // Render table with data
       renderTable(data);

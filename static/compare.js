@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var compareForm = document.getElementById("compareForm");
   var plotContainer = document.getElementById("plotContainer");
+  var loader = document.querySelector(".loader");
 
   compareForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -9,7 +10,23 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("stocks").selectedOptions
     ).map((option) => option.value);
 
-    console.log(selectedStocks);
+    // first check if dates are selected correctly
+    var beginDate = document.getElementById("begin").value;
+    var endDate = document.getElementById("end").value;
+
+    if (!beginDate || !endDate || beginDate > endDate) {
+      alert("Please select valid date range.");
+      return;
+    }
+
+    // Check if dates are before today's date
+    var today = new Date().toISOString().split("T")[0];
+
+    if (beginDate > today || endDate > today) {
+      alert("Selected dates should be from past/present, not future.");
+      return;
+    }
+    
     var requestData = {
       stocks: selectedStocks,
       begin: document.getElementById("begin").value,
@@ -18,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // create a post fetch request to the server
+
+    // Show loader
+    loader.style.display = "block";
 
     fetch("/api/compare", {
       method: "POST",
@@ -41,10 +61,15 @@ document.addEventListener("DOMContentLoaded", function () {
         iFrameElement.style.width = "70vw";
         iFrameElement.style.height = "68vh";
 
+        // Hide loader
+        loader.style.display = "none";
+
         plotContainer.innerHTML = "";
         plotContainer.appendChild(iFrameElement);
       })
       .catch(function (error) {
+        // Hide loader in case of an error
+        loader.style.display = "none";
         console.error("Fetch error:", error);
       });
   });

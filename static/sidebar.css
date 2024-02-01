@@ -33,3 +33,20 @@ aside {
     color: #4CAF50;
     cursor: pointer;
 }
+
+
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 4rem;
+    width: 8rem;
+    font-size: 1.25rem;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}

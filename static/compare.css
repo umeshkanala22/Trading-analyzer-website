@@ -40,41 +40,55 @@ main {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.plot-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.plot-form-top {
-  margin-bottom: 1rem;
-}
-
-.select-title {
-  font-size: 1.5rem;
-  margin-right: 1rem;
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 #plotContainer {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
-.plot-title {
-  font-size: 2rem;
-  margin-top: 0;
+label {
+  font-weight: 500;
+  margin-right: 0.5rem;
 }
 
-.stock-dropdown, 
+.compare-form-top {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.compare-title {
+  font-size: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.select-instructions {
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
+.date-picker {
+  background-color: #d5fed6;
+  outline: none;
+  border-radius: 5px;
+  padding: 3px;
+  margin-right: 2rem;
+}
+
+.stock-dropdown,
 .criteria-dropdown {
   font-size: 1rem;
   padding: 0.2rem;
+  border-radius: 0.5rem;
   border: 1px solid #4caf50;
   background-color: #d5fed6;
   cursor: pointer;
-  border-radius: 0.5rem;
   outline: none;
   scroll-behavior: smooth;
   font-weight: 500;
@@ -84,7 +98,7 @@ main {
 .criteria-dropdown option {
   font-size: 1rem;
   padding: 0.2rem;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   border: none;
   background-color: #d5fed6;
   color: #333;
@@ -101,16 +115,16 @@ main {
   background-color: #c1f2c4;
 }
 
-.stock-dropdown::-webkit-scrollbar{
+.stock-dropdown::-webkit-scrollbar {
   width: 8px;
 }
 
-.stock-dropdown::-webkit-scrollbar-thumb{
+.stock-dropdown::-webkit-scrollbar-thumb {
   background-color: #4caf50;
   border-radius: 4px;
 }
 
-.stock-dropdown::-webkit-scrollbar-track{
+.stock-dropdown::-webkit-scrollbar-track {
   background-color: #d5fed6;
 }
 
@@ -138,17 +152,4 @@ main {
   background-color: #5fd961;
   color: white;
   /* border: none; */
-}
-
-.date-picker {
-  background-color: #d5fed6;
-  outline: none;
-  border-radius: 5px;
-  padding: 3px;
-  margin-right: 2rem;
-}
-
-label {
-  font-weight: 500;
-  margin-right: 0.5rem;
 }

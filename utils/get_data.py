@@ -4,7 +4,7 @@ from datetime import date, datetime
 import matplotlib.pyplot as plt
 import plotly.express as px
 from utils.data import stock_names
-from nsetools import Nse
+
 
 def get_stock_data(stock_symbol, start_date, end_date, criteria):
     criteria = criteria.upper()

@@ -8,7 +8,6 @@
     <!-- link the js file which is present in the static folder -->
     <link rel="stylesheet" href="{{url_for('static', filename='plot.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='sidebar.css')}}">
-    <script src="{{url_for('static', filename='plot.js')}}"></script>
 </head>
 <body>
     <div class="overlay"></div>
@@ -20,9 +19,11 @@
         <a class="sidebar-tabs" href="/compare">Compare Stocks</a>
     </aside>
     <main>
-    <h2>Plot graph here</h2>
-    <form id="plotForm">
-        <select name="stock" id="stock">
+    <h2>Compare multiple stocks here</h2>
+    <form id="compareForm">
+        <!-- create a selector to select stock names (maximum 5). stock data is passed in stocks -->
+        <label for="selectStocks">Select Stocks</label>
+        <select name="selectStocks" id="stocks" multiple>
             {% for key, value in stocks.items() %}
                 <option value="{{key}}">{{value}}</option>
             {% endfor %}
@@ -50,5 +51,6 @@
     <!-- Container for displaying the plot -->
     <div id="plotContainer" class="graph"></div>
     </main>
+    <script src="{{url_for('static', filename='compare.js')}}"></script>
 </body>
 </html>

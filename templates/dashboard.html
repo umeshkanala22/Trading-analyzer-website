@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='sidebar.css')}}">
     <title>Dashboard</title>
 </head>
 <body>
-    <aside>
-        <h1 class="sidebar">Sidebar</h1>
-        <p>Links and other contents ...</p>
+    <aside id="sidebar" class="sidebar">
+        <img class="logo" src="{{url_for('static', filename='images/logo.png')}}" alt="logo">
+        <h2>MarketPulse</h2>   
+        <a class="sidebar-tabs" href="/test">Dashboard</a>
+        <a class="sidebar-tabs" href="/plot">Stock History</a>
+        <a class="sidebar-tabs" href="/compare">Compare Stocks</a>
     </aside>
 
     <main>

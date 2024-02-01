@@ -107,11 +107,11 @@ function filterData() {
   loader.style.display = "block";
 
   setTimeout(function() {
-      cachedData = cachedData.filter(function(item) {
+      data = cachedData.filter(function(item) {
           var itemValue = parseFloat(item[selectedProperty]);
           return itemValue >= filterFromValue && itemValue <= filterToValue;
       });
-      renderTable(cachedData);
+      renderTable(data);
       loader.style.display = "none";
   }, 1000); // Simulating an asynchronous operation with a timeout
 }

@@ -23,7 +23,7 @@ def get_live_stock_data(stock_symbol):
 def generate_graph(df, criteria, stock_symbol):
     df = df[["DATE", criteria]]
     fig = px.line(df, x="DATE", y=criteria, title=criteria + " vs Date for " + stock_symbol)
-    filepath = "static/graph/" + stock_symbol + "_" + criteria + ".html"
+    filepath = "static/graph/history.html"
     fig.write_html(filepath)
     return filepath
 
@@ -48,11 +48,12 @@ def generate_combined_graph(criteria, stock_symbols, start_date, end_date):
     fig = px.line(title=f"{criteria} vs Date for Multiple Stocks")
 
     
-    for df, stock_symbol in zip(dataframes, stock_symbols):
-        df_subset = df[["DATE", criteria]]
-        fig.add_trace(px.line(df_subset, x="DATE", y=criteria, name=stock_symbol))
+    for i in range(len(dataframes)):
+        df = dataframes[i]
+        df = df[["DATE", criteria]]
+        fig.add_scatter(x=df["DATE"], y=df[criteria], name=stock_symbols[i])
 
-    filepath = f"static/graph/combined_{criteria}.html"
+    filepath = f"static/graph/combined.html"
 
     fig.write_html(filepath)
     return filepath

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils.data import stock_names
-from utils.get_data import get_stock_data, get_live_stock_data
+from utils.get_data import get_stock_data, get_live_stock_data, generate_combined_graph
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with your actual secret key
@@ -79,6 +79,11 @@ def plot():
     stocks = stock_names
     return render_template('plot.html', stocks=stocks)
 
+@app.route('/compare')
+def compare():
+    stocks = stock_names
+    return render_template('compare.html', stocks=stocks)
+
 
 # apis
 
@@ -95,6 +100,21 @@ def get_plot():
     start_date = request.args.get('begin')
     end_date = request.args.get('end')
     image_path = get_stock_data(selected_stock, start_date, end_date, selected_criteria)
+    print("Image Path: ", image_path)
+    json_data = {
+        "image_path": image_path
+    }
+    return json_data
+
+@app.route('/api/compare', methods=['POST'])
+def get_compare_plot():
+    data = request.get_json()
+    
+    selected_stocks = data['stocks']
+    selected_criteria = data['criteria']
+    start_date = data['begin']
+    end_date = data['end']
+    image_path = generate_combined_graph(selected_criteria, selected_stocks, start_date, end_date)
     print("Image Path: ", image_path)
     json_data = {
         "image_path": image_path

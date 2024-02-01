@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
     <!-- link the js file which is present in the static folder -->
     <link rel="stylesheet" href="{{url_for('static', filename='plot.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='sidebar.css')}}">
-    <script src="{{url_for('static', filename='plot.js')}}"></script>
+<script src="{{url_for('static', filename='plot.js')}}"></script>
 </head>
 <body>
     <div class="overlay"></div>
@@ -16,39 +17,41 @@
         <img class="logo" src="{{url_for('static', filename='images/logo.png')}}" alt="logo">
         <h2>MarketPulse</h2>   
         <a class="sidebar-tabs" href="/test">Dashboard</a>
-        <a class="sidebar-tabs" href="/plot">Stock History</a>
+        <a class="sidebar-tabs" href="/plot">stock Graph</a>
         <a class="sidebar-tabs" href="/compare">Compare Stocks</a>
     </aside>
     <main>
     <h2>Plot graph here</h2>
-    <form id="plotForm">
-        <select name="stock" id="stock">
-            {% for key, value in stocks.items() %}
-                <option value="{{key}}">{{value}}</option>
-            {% endfor %}
-        </select>
-        <!-- put two date selectors (begin and end) and begin date should be before -->
-        <label for="begin">Begin Date</label>
-        <input type="date" name="begin" id="begin">
-        <label for="end">End Date</label>
-        <input type="date" name="end" id="end">
-        <!-- selected criteria out of eight -->
-        <label for="criteria">Criteria</label>
-        <select name="criteria" id="criteria">
-            <option value="open">Open</option>
-            <option value="high">High</option>
-            <option value="low">Low</option>
-            <option value="close">Close</option>
-            <option value="ltp">Last Trade Price</option>
-            <option value="volume">Volume</option>
-            <option value="value">Value</option>
-            <option value="no of trades">No of Trades</option>
-        </select>
-        <input type="submit" value="Submit">
-    </form>
+            <form id="plotForm">
+            <select name="stock" id="stock">
+                {% for key, value in stocks.items() %}
+                    <option value="{{key}}">{{value}}</option>
+                {% endfor %}
+            </select> 
+            <!-- put two date selectors (begin and end) and begin date should be before -->
+             <label for="begin">Begin Date</label>
+            <input type="date" name="begin" id="begin">
+            <label for="end">End Date</label>
+            <input type="date" name="end" id="end"> 
+            <!-- selected criteria out of eight -->
+            <label for="criteria">Criteria</label>
+            <select name="criteria" id="criteria">
+                <option value="open">Open</option>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+                <option value="close">Close</option>
+                <option value="ltp">Last Trade Price</option>
+                <option value="volume">Volume</option>
+                <option value="value">Value</option>
+                <option value="no of trades">No of Trades</option>
+            </select>
+            <input type="submit" value="Submit"> 
+        </form> 
+ 
 
     <!-- Container for displaying the plot -->
     <div id="plotContainer" class="graph"></div>
     </main>
+ 
 </body>
 </html>

@@ -59,7 +59,7 @@ def login():
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' in session:
-        return render_template('welcome.html', username=session['username'])
+        return render_template('dashboard.html')
     else:
         return redirect(url_for('index'))
 
@@ -72,7 +72,8 @@ def logout():
 
 @app.route('/test')
 def test():
-    return render_template('dashboard.html')
+    stocks = stock_names
+    return render_template('dashboard.html', stocks=stocks)
 
 @app.route('/plot')
 def plot():

@@ -1,22 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var plotForm = document.getElementById("plotForm");
+  var compareForm = document.getElementById("compareForm");
   var plotContainer = document.getElementById("plotContainer");
 
-  plotForm.addEventListener("submit", function (e) {
+  compareForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    var selectedStocks = Array.from(
+      document.getElementById("stocks").selectedOptions
+    ).map((option) => option.value);
+
+    console.log(selectedStocks);
     var requestData = {
-      stock: document.getElementById("stock").value,
+      stocks: selectedStocks,
       begin: document.getElementById("begin").value,
       end: document.getElementById("end").value,
       criteria: document.getElementById("criteria").value,
     };
 
-    var params = new URLSearchParams(requestData);
+    // create a post fetch request to the server
 
-    // create a fetch request to the server
-    fetch("/api/plot?" + params, {
-      method: "GET",
+    fetch("/api/compare", {
+      method: "POST",
+      body: JSON.stringify(requestData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then(function (response) {
         if (!response.ok) {
@@ -30,12 +38,11 @@ document.addEventListener("DOMContentLoaded", function () {
         var iFrameElement = document.createElement("iframe");
         iFrameElement.src = jsonData.image_path;
 
-        iFrameElement.style.width = "70vw"
-        iFrameElement.style.height = "70vh"
+        iFrameElement.style.width = "70vw";
+        iFrameElement.style.height = "68vh";
 
         plotContainer.innerHTML = "";
         plotContainer.appendChild(iFrameElement);
-        // Now you can use jsonData as needed in your application
       })
       .catch(function (error) {
         console.error("Fetch error:", error);

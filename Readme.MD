@@ -40,7 +40,7 @@ The Trading Analyzer website is a platform designed for users to analyze stock d
 
 1. **Dashboard**: ![Dashboard Screenshot](Screenshot/Dashboard.png)
 2. **Plot Page**: ![Plot Page Screenshot](Screenshot/Plot.png)
-3. **Compare Stocks**: ![Compare Stocks Screenshot](screenshot/Compare.png)
+3. **Compare Stocks**: ![Compare Stocks Screenshot](Screenshot/Compare.png)
 
 ## Future Considerations
 

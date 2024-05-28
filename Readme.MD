@@ -103,10 +103,4 @@ Upon running the command, the Flask server will start, and the application shoul
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 Feel free to reach out if you have any questions or need further assistance. Happy coding!
